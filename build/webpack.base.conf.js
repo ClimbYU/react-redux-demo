@@ -20,6 +20,14 @@ const config = {
             // 'webpack-hot-middleware/client',
             'webpack-hot-middleware/client?reload=true',
             './src/main.js'
+        ],
+        common: [
+            "react",
+            'react-dom',
+            'react-router',
+            'redux',
+            'react-redux',
+            'redux-thunk',
         ]
     },
     output: {

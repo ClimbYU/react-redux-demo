@@ -16,7 +16,7 @@ import {fetchPosts} from '../../actions/fetchActions'
     }
     componentDidMount(){
 
-      this.props.fetchPosts('/customer/listQuotaRecords?code=031TOoU70SVstK1Z8WT70yuxU70TOoUO')
+      this.props.fetchPosts('/customer/listQuotaRecords?code=0713G5Bq1xcLDq0IRLBq19raBq13G5Bm')
     }
     render(){
         console.log(this.props)
