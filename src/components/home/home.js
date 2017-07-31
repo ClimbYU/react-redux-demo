@@ -2,7 +2,7 @@ import React ,{ Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
-import {fetchPosts} from '../../actions/fetchActions'
+import {fetchPostsGet,fetchPosts} from '../../actions/fetchActions'
 
 
 
@@ -16,13 +16,14 @@ import {fetchPosts} from '../../actions/fetchActions'
     }
     componentDidMount(){
 
-      this.props.fetchPosts('/customer/listQuotaRecords?code=0713G5Bq1xcLDq0IRLBq19raBq13G5Bm')
+    //   this.props.fetchPostsGet('/customer/listQuotaRecords?code=0611ulz124Eit11gl8B12Ycjz121ulzk')
+    this.props.fetchPosts('/getCustomerInfo','011cnz202rlmkX0QLpZZ1c9E202cnz2u')
     }
     render(){
         console.log(this.props)
         const {name,cardPhone,url,flag,userInfo} = this.props.customerInfo
-        const userInfoList = userInfo ? userInfo.quotaOrderList.length : flag;
-        console.log(flag);
+        const userInfoList = userInfo ? userInfo.userInfo.bindedPhone : flag;
+        console.log(userInfo);
         return (
             <div>
                 <div>Home</div>
@@ -41,5 +42,8 @@ const mapStateToProps = (state) =>({
 
 export default connect(
     mapStateToProps,
-    {fetchPosts}
+    {
+        fetchPostsGet,
+        fetchPosts
+    }
 )(Home)
