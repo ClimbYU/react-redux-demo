@@ -7,7 +7,7 @@ import {
   IndexRoute
 } from 'react-router'
 
-import Home from '../components/home/home'
+import Home from '../containers/home'
 // import Bless from '../components/bless/bless'
 const Bless = (location,cb) => {
     require.ensure([],require => {
@@ -15,7 +15,7 @@ const Bless = (location,cb) => {
        * webpack支持es6，所以要用默认写法 require('../components/bless/bless').default 
        * 必须配合 getComponent 使用才可以使用 cb(null,Bless)
        */
-      cb(null,require('../components/bless/bless').default)
+      cb(null,require('../containers/bless').default)
     },'bless')
 };
 
@@ -26,7 +26,7 @@ const Exchange = (location,cb) => {
        * webpack支持es6，所以要用默认写法 require('../components/bless/bless').default 
        * 必须配合 getComponent 使用才可以使用 cb(null,Bless)
        */
-      cb(null, require('../components/exchange/exchange').default)
+      cb(null, require('../containers/exchange').default)
     },'exchange')
 };
 
@@ -37,7 +37,7 @@ const Recharge = (location,cb) => {
        * webpack支持es6，所以要用默认写法 require('../components/bless/bless').default 
        * 必须配合 getComponent 使用才可以使用 cb(null,Bless)
        */
-      cb(null,require('../components/recharge/recharge').default)
+      cb(null,require('../containers/recharge').default)
     },'recharge')
 };
 
@@ -48,7 +48,7 @@ const SignCard = (location,cb) => {
        * webpack支持es6，所以要用默认写法 require('../components/bless/bless').default 
        * 必须配合 getComponent 使用才可以使用 cb(null,Bless)
        */
-      cb(null,require('../components/signCard/signCard').default)
+      cb(null,require('../containers/signCard').default)
     },'signCard')
 };
 // import User from '../components/user/user'
@@ -58,7 +58,7 @@ const User = (location,cb) => {
        * webpack支持es6，所以要用默认写法 require('../components/bless/bless').default 
        * 必须配合 getComponent 使用才可以使用 cb(null,Bless)
        */
-      cb(null, require('../components/user/user').default)
+      cb(null, require('../containers/user').default)
     },'user')
 };
 

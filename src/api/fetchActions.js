@@ -2,7 +2,7 @@ import {URLADDRESS} from '../config'
 import {
     REQUEST_POST,
     RECEIVE_POST
-} from '../constants/actionTypes'
+} from '../actions/actionTypes'
 
 //get请求
 export const fetchPostsGet = (url) => dispatch => {

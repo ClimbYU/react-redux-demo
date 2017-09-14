@@ -2,7 +2,7 @@ import {
     SHOW_QUOTA ,
     REQUEST_POST,
     RECEIVE_POST
-} from '../constants/actionTypes'
+} from '../actions/actionTypes'
 
 
 const initialState = {

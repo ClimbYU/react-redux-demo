@@ -21,6 +21,7 @@ module.exports = merge(baseWebpackConfig, {
     //         'redux-thunk',
     //     ]
     // },
+    devtool: '#eval-source-map',
     plugins: [
         /**
          * 提取公共模块
@@ -60,6 +61,6 @@ module.exports = merge(baseWebpackConfig, {
             template: './src/index.html'
         }),
         // 自动打开浏览器
-        new OpenBrowserPlugin({ url: 'http://localhost:8000' }),
+        new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
     ]
 })

@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const babelpolyfill = require("babel-polyfill");
 
 // 解析目录地址
 const DEV = path.resolve(__dirname, '../dev'); // dev目录
@@ -27,7 +28,8 @@ const config = {
             'react-router',
             'redux',
             'react-redux',
-            'redux-thunk',
+            // 'redux-thunk',
+            // 'redux-saga',
         ]
     },
     output: {
