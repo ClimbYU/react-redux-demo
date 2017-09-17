@@ -17,17 +17,16 @@ import {fetchPostsGet,fetchPosts} from '../api/fetchActions'
     componentDidMount(){
 
     //   this.props.fetchPostsGet('/customer/listQuotaRecords?code=0611ulz124Eit11gl8B12Ycjz121ulzk')
-    this.props.fetchPosts('/getCustomerInfo','011cnz202rlmkX0QLpZZ1c9E202cnz2u')
+    // this.props.fetchPosts('/getCustomerInfo','011cnz202rlmkX0QLpZZ1c9E202cnz2u')
     }
     render(){
-        console.log(this.props)
-        const {name,cardPhone,url,flag,userInfo} = this.props.customerInfo
-        const userInfoList = userInfo ? userInfo.userInfo.bindedPhone : flag;
-        console.log(userInfo);
+        const {data} = this.props.customerInfo;
         return (
             <div>
                 <div>Home</div>
-                <div>{userInfoList}</div>      
+                <div>
+                    {data.map((_data,index) => <div key={index+1}>{index+1}：{_data.traderSerialId}</div>)}
+                </div>      
                 <Link to = '/bless'>next</Link>
             </div>
             
@@ -41,9 +40,5 @@ const mapStateToProps = (state) =>({
 });
 
 export default connect(
-    mapStateToProps,
-    {
-        fetchPostsGet,
-        fetchPosts
-    }
+    mapStateToProps
 )(Home)
