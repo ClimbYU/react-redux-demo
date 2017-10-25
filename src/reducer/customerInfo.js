@@ -1,7 +1,8 @@
 import { 
     SHOW_QUOTA ,
     REQUEST_POST,
-    RECEIVE_POST
+    RECEIVE_POST,
+    GET_CUSTOMER_INFO
 } from '../actions/actionTypes'
 
 
@@ -25,7 +26,7 @@ const customerInfo = (state = initialState , actions) => {
             return Object.assign({}, state, {
                 data: actions.data,
                 userInfo: actions.userInfo
-            });         
+            });     
         default :
             return state
     }

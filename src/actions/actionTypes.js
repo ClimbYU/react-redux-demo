@@ -1,3 +1,7 @@
 export const SHOW_QUOTA = 'SHOW_QUOTA'
 export const REQUEST_POST = 'REQUEST_POST'
 export const RECEIVE_POST = 'RECEIVE_POST'
+export const GET_CUSTOMER_INFO = 'GET_CUSTOMER_INFO'
+export const  RES_ERROR = 'RES_ERROR'
+export const START_GET_DATA = 'START_GET_DATA'
+export const END_GET_DATA = 'END_GET_DATA'

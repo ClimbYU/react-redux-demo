@@ -1,3 +1,9 @@
-export const URLADDRESS = 'http://139.196.22.147:8088/';
-export const REQUEST_POST = 'REQUEST_POST';
-export const RECEIVE_POST = 'RECEIVE_POST';
+
+const config = {
+     URLADDRESS : 'http://cangdu.org:8001/',
+     REQUEST_POST : 'REQUEST_POST',
+     RECEIVE_POST : 'RECEIVE_POST',
+     GET_CUSTOMER_INFO:'v1/cities'
+}
+
+export default config 

@@ -22,7 +22,6 @@ import rootSaga from './sagas';
 // )
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
-//   const routes = require('./routes')
 
 ReactDOM.render (
       <Provider store={store}>
@@ -30,3 +29,43 @@ ReactDOM.render (
       </Provider>,
      document.getElementById('root')
 )
+// var readFile = function (number){
+//       return new Promise(function (resolve, reject){
+//             setTimeout(function(){
+//                   console.log('number='+ number)
+//                   resolve(number + 'async')
+//             },1000)
+//       });
+//     };
+
+//     var gen = function* (){
+//       var f1 = yield readFile(5);
+//       console.log(f1.toString());
+//       var f2 = yield readFile(6);
+     
+//       console.log(f2.toString());
+//     };
+
+//     var g = gen();
+    
+//     g.next().value.then(function(data){
+//       g.next(data).value.then(function(data){
+//         g.next(data);
+//       });
+//     })
+
+// function run(gen){
+//       var g = gen();
+    
+//       function next(data){
+//         var result = g.next(data);
+//         if (result.done) return result.value;
+//         result.value.then(function(data){
+//           next(data);
+//         });
+//       }
+    
+//       next();
+//     }
+    
+//     run(gen);

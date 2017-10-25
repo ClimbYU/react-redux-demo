@@ -1,24 +1,46 @@
 import { call, put, fork, take, all } from 'redux-saga/effects';
-import {fetchPostsGet,fetchPosts,requestPosts,receivePosts} from '../api/fetchActions'
+import {
+  REQUEST_POST,
+  RECEIVE_POST,
+  GET_CUSTOMER_INFO
+} from '../actions/actionTypes'
+import{getMessageLoading,messageEnd}from '../actions'
+import fetchData from '../api/fetchActions'
+import {optionDeal} from '../api/utils'
 
-// export function fetchPostsApi(reddit) {
-//     return fetch(`http://139.196.22.147:8088/${reddit}` )
-//             .then(response => response.json() )
-//             .then(json => json.data.children.map(child => child.data) )
-// }
+//获取全部城市
+function* getCityAll(options){
+    yield put(getMessageLoading())
+    const {data} = yield call(fetchData,options)
+    console.log(call(fetchData,options))
+    console.log(data)
+}
+//获取热门城市
+function* getCityHot(options){
+  const {data} = yield call(fetchData,options)
+  console.log(data)
+}
+//获取位置信息
+function* getCityLoc(options){
+  const {data} = yield call(fetchData,options)
+  console.log(data)
+}
 
-function * getMessage(){
-    yield put( requestPosts(['Loading...']) )
-   const {data} =  yield call(fetchPostsGet, 'pipeApi/recharge/queryRecharge')
-   yield put(receivePosts(data) )
-   if(data){
-       console.log('success');
-    // yield put(changeSubject.fromSaga(prevSubject));
-   }
+function* watchInitData(){
+      while (true) {
+        const {options} = yield take(GET_CUSTOMER_INFO);
+        yield fork(getCityAll,options);
+        if(options){
+          const optionsHot = optionDeal('get',{type:'hot'});
+          const optionsLoc = optionDeal('get',{type:'guess'});
+          yield fork(getCityHot,optionsHot);
+          yield fork(getCityLoc,optionsLoc)
+        }
+      }
 }
 
 export default function* root() {
     yield all([
-      fork(getMessage)
+      fork(watchInitData)
     ])
-  }
+}

@@ -2,30 +2,37 @@ import React ,{ Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
-import {fetchPostsGet,fetchPosts} from '../api/fetchActions'
-
-
+import {initData} from '../actions'
+import config from '../config' 
+import {optionDeal} from '../api/utils'
 
  class Home extends Component{
 
     constructor (props) {
         super(props);
+        this.getInfo = this.getInfo.bind(this)
     }
     componentWillMount(){
       
     }
     componentDidMount(){
-
-    //   this.props.fetchPostsGet('/customer/listQuotaRecords?code=0611ulz124Eit11gl8B12Ycjz121ulzk')
-    // this.props.fetchPosts('/getCustomerInfo','011cnz202rlmkX0QLpZZ1c9E202cnz2u')
+        const options1 = optionDeal('get',{type:'group'})
+        this.props.initData(options1)
+    }
+    getInfo(){
+        // const options = optionDeal('get',{type:'group'})
+        // this.props.initData(options)
     }
     render(){
         const {data} = this.props.customerInfo;
         return (
             <div>
                 <div>Home</div>
+                <button onClick={this.getInfo}>获取</button>
+                {/* <button onClick={this.props.getCustomer}>获取</button> */}
                 <div>
-                    {data.map((_data,index) => <div key={index+1}>{index+1}：{_data.traderSerialId}</div>)}
+                    {/* {data.map((_data,index) => <div key={index+1}>{index+1}：{_data.traderSerialId}</div>)} */}
+                    {data}
                 </div>      
                 <Link to = '/bless'>next</Link>
             </div>
@@ -35,10 +42,10 @@ import {fetchPostsGet,fetchPosts} from '../api/fetchActions'
 }
 
 const mapStateToProps = (state) =>({
-    customerInfo:state.customerInfo,
-    // rout:state.routing
+    customerInfo:state.customerInfo
 });
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    {initData}
 )(Home)
