@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); //css单独打包
 
 const baseWebpackConfig = require('./webpack.base.conf')
 const config = require('../config')
@@ -62,5 +63,10 @@ module.exports = merge(baseWebpackConfig, {
         }),
         // 自动打开浏览器
         new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
+        new ExtractTextPlugin({
+            filename: '[name].css',
+            disable: false,
+            allChunks: true,
+        })
     ]
 })

@@ -1,10 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
 const babelpolyfill = require("babel-polyfill");
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); //css单独打包
 
 // 解析目录地址
 const DEV = path.resolve(__dirname, '../dev'); // dev目录
 const OUTPUT = path.resolve(__dirname, '../output'); // output目录
+var ROOT_PATH = path.resolve(__dirname);
+const APP_PATH = path.resolve(ROOT_PATH,'src')
 // const pathDeal = (configPath) => path.resolve(__dirname,configPath);
 
 const config = {
@@ -39,7 +42,8 @@ const config = {
         chunkFilename:'[name].[hash]js'
     },
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.js|jsx$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
@@ -49,17 +53,31 @@ const config = {
                     }
                 }
             },
-            // {
-            //     test: /\.(png|jpg|gif)$/,
-            //     exclude: /(node_modules|bower_components)/,
-            //     use: {
-            //         loader: 'url-loader',
-            //         options: {
-            //             limit: 8192,
-            //             name: path.resolve(__dirname, 'img/[name].[ext]')
-            //         }
-            //     }
-            // }
+              {
+                test: /\.(scss|css)$/,
+                exclude: /^node_modules$/,
+                use: ExtractTextPlugin.extract({
+                  use:[
+                    {
+                      loader: 'css-loader',
+                      options:{
+                        modules:true,
+                        importLoaders:1,
+                        localIdentName:'[local]',
+                        // localIdentName:'[local]_[hash:base64:5]',
+                        sourceMap: true,
+                      },
+                    },
+                    {
+                      loader:'sass-loader',
+                      options:{
+                          sourceMap: true,
+                      },
+                    },
+                  ],
+                  fallback: 'style-loader',
+                }),
+              }
         ]
     }
 }

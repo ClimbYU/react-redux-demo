@@ -6,7 +6,9 @@ import {
     GET_CUSTOMER_INFO,
     RES_ERROR,
     START_GET_DATA,
-    END_GET_DATA
+    ALL_GET_DATA,
+    HOT_GET_DATA,
+    LOC_GET_DATA
 } from '../actions/actionTypes'
 
 export const requestPosts = data => ({
@@ -29,6 +31,19 @@ export const getMessageLoading = () => ({
     type:START_GET_DATA
 })
 //调用接口结束
-export const messageEnd = () => ({
-    type:END_GET_DATA
+export const messageLocEnd = (res) => ({
+    type:LOC_GET_DATA,
+    data:res
+})
+
+//调用接口结束
+export const messageHotEnd = (res) => ({
+    type:HOT_GET_DATA,
+    data:res
+})
+
+//调用接口结束
+export const messageAllEnd = (res) => ({
+    type:ALL_GET_DATA,
+    data:res
 })

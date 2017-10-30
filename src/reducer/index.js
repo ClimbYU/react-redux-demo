@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-import customerInfo from './customerInfo'
+import dealInitData from './dealInitData'
 
 export default combineReducers({
-    customerInfo,
+    dealInitData,
     //必须加上routing才能渲染成功
     routing: routerReducer
 })
