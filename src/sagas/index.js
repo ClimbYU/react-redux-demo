@@ -4,9 +4,10 @@ import {
   RECEIVE_POST,
   GET_CUSTOMER_INFO
 } from '../actions/actionTypes'
-import{getMessageLoading,messageAllEnd,messageHotEnd,messageLocEnd}from '../actions'
+import{getMessageLoading,messageAllEnd,messageHotEnd,messageLocEnd,messageNav}from '../actions'
 import fetchData from '../api/fetchActions'
 import {optionDeal} from '../api/utils'
+import config from '../config' 
 
 //获取全部城市
 function* getCityAll(options){
@@ -24,16 +25,23 @@ function* getCityLoc(options){
   const {data} = yield call(fetchData,options)
   yield put(messageLocEnd(data))
 }
+//获取翻页信息
+function* getNavMessage(options){
+    const message = yield call(fetchData,options);
+    yield put (messageNav(message))
+}
 
 function* watchInitData(){
       while (true) {
         const {options} = yield take(GET_CUSTOMER_INFO);
         if(options){
           yield fork(getCityAll,options);
-          const optionsHot = optionDeal('get',{type:'hot'});
-          const optionsLoc = optionDeal('get',{type:'guess'});
+          const optionsHot = optionDeal('get',{type:'hot'}, config.GET_CUSTOMER_INFO);
+          const optionsLoc = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO);
+          const optionNav = optionDeal('get',{}, config.GET_NAV_MESSAGE);
           yield fork(getCityHot,optionsHot);
-          yield fork(getCityLoc,optionsLoc)
+          yield fork(getCityLoc,optionsLoc);
+          yield fork (getNavMessage,optionNav);
         }
       }
 }

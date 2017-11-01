@@ -8,7 +8,8 @@ import {
     START_GET_DATA,
     ALL_GET_DATA,
     HOT_GET_DATA,
-    LOC_GET_DATA
+    LOC_GET_DATA,
+    NAV_MESSAGE_RES
 } from '../actions/actionTypes'
 
 export const requestPosts = data => ({
@@ -46,4 +47,11 @@ export const messageHotEnd = (res) => ({
 export const messageAllEnd = (res) => ({
     type:ALL_GET_DATA,
     data:res
+})
+
+//获取翻页信息
+
+export const messageNav = (res) =>({
+    type:NAV_MESSAGE_RES,
+    data:res.data
 })

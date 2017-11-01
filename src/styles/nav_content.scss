@@ -1,0 +1,19 @@
+@import 'mixin';
+.food_container {
+    flex-wrap: wrap;
+    @include hd();
+    .food_container_type {
+        width: 25%;
+        padding: .3rem 0;
+        flex-direction: column;
+        @include hd(center);
+        align-items: center;
+        img {
+            width: 2.8rem;
+            height: 2.8rem;
+        }
+        figcaption {
+            @include zt()
+        }
+    }
+}

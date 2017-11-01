@@ -1,0 +1,9 @@
+@mixin hd($type:space-between) {
+    display: flex;
+    justify-content: $type;
+}
+
+@mixin zt($font:center, $size:0.55rem) {
+    text-align: $font;
+    font-size: $size;
+}

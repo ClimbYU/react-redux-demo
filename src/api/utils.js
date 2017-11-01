@@ -2,11 +2,11 @@
 import config from '../config' 
 
 
-export const optionDeal = function(type,_data){
+export const optionDeal = function(type,_data,_url){
     const options = {
         method:type,
-        url:config.URLADDRESS + config.GET_CUSTOMER_INFO,
-        fetchType:config.GET_CUSTOMER_INFO,
+        url:config.URLADDRESS + _url,
+        fetchType:_url,
         data:_data
     }
 

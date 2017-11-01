@@ -1,3 +1,51 @@
+@import 'mixin';
+body,
+div,
+span,
+header,
+footer,
+nav,
+section,
+aside,
+article,
+ul,
+dl,
+dt,
+dd,
+li,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+i,
+b,
+textarea,
+button,
+input,
+select,
+figure,
+figcaption,
+{
+    padding: 0;
+    margin: 0;
+    font-family: 'Microsoft YaHei';
+}
+
 .component_container {
     color: blue;
+}
+
+.box {
+    @include hd();
+    align-items: center
+}
+
+.header_box {
+    padding: 0 1rem;
+    height: 3rem;
+    background: #3190e8;
 }

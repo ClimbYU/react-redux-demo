@@ -32,14 +32,15 @@ const config = {
             'redux',
             'react-redux',
             // 'redux-thunk',
-            // 'redux-saga',
+            'redux-saga',
         ]
     },
     output: {
         path: OUTPUT,
         filename: '[name].[hash].js',
         // publicPath: './',
-        chunkFilename:'[name].[hash]js'
+        chunkFilename:'[name].[hash]js',
+        publicPath:'/' //未配置此参数时样式中的图片加载会报错
     },
     module: {
         rules: [
@@ -53,6 +54,16 @@ const config = {
                     }
                 }
             },
+             {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                exclude: /^node_modules$/,
+                use:[{
+                    loader: 'url-loader',
+                    options: {
+                      limit: 10000
+                    }
+                }]
+              },
               {
                 test: /\.(scss|css)$/,
                 exclude: /^node_modules$/,
