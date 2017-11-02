@@ -20,7 +20,9 @@ export default class NavContent extends Component{
     componentDidMount(){
         new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
-            loop: true
+            loop: true,
+            grabCursor : true,//鼠标变为手柄
+            preventLinksPropagation : true,
         });
     }
     componentWillUpdate(){
@@ -32,7 +34,7 @@ export default class NavContent extends Component{
         for (let i = 0, j = 0; i < navLength; i += 8, j++) {
             navMessage[j] = this.props.message.splice(0, 8);
         }
-        console.log(navMessage)
+        
         const swiperContent = function(message){
             return message.map((data,index) => <Link key={index} className='food_container_type'>
             <figure>
@@ -46,7 +48,7 @@ export default class NavContent extends Component{
         </div> )
         return(
             <nav>
-                <div className='swiper-container'>
+                <div className='swiper-container swiper-pagination-bottom'>
                   <div className='swiper-wrapper'>
                         {navSwiper}
                         {/* <div className="swiper-slide">slider1</div>

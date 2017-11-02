@@ -6,7 +6,8 @@ import {
     ALL_GET_DATA,
     HOT_GET_DATA,
     LOC_GET_DATA,
-    NAV_MESSAGE_RES
+    NAV_MESSAGE_RES,
+    SHOP_MESSAGE_RES
 } from '../actions/actionTypes'
 
 
@@ -14,8 +15,9 @@ const initialState = {
     data:[],
     allCity:[],
     hotCity:[],
-    locCity:[],
+    locCity:{},
     navMessage:[],
+    shopList:[],
     url:'pipeApi/recharge/queryRecharge'
 }
 
@@ -41,7 +43,11 @@ const dealInitData = (state = initialState , actions) => {
         case NAV_MESSAGE_RES :
             return Object.assign({}, state, {
                 navMessage: actions.data
-        });          
+        });
+        case SHOP_MESSAGE_RES:
+            return Object.assign({}, state, {
+                shopList: actions.data
+        });         
         default :
             return state
     }

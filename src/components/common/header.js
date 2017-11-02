@@ -12,7 +12,7 @@ export default class Header extends Component {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
     }
     componentDidMount(){
-        console.log(this.props)
+      
     }
     render(){
         return (

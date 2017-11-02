@@ -9,7 +9,9 @@ import {
     ALL_GET_DATA,
     HOT_GET_DATA,
     LOC_GET_DATA,
-    NAV_MESSAGE_RES
+    NAV_MESSAGE_RES,
+    SHOP_MESSAGE_GET,
+    SHOP_MESSAGE_RES
 } from '../actions/actionTypes'
 
 export const requestPosts = data => ({
@@ -49,9 +51,20 @@ export const messageAllEnd = (res) => ({
     data:res
 })
 
-//获取翻页信息
+//获取轮播信息
 
 export const messageNav = (res) =>({
     type:NAV_MESSAGE_RES,
+    data:res.data
+})
+//获取商家信息
+export const shopMessage = (option) =>({
+    type:SHOP_MESSAGE_GET,
+    option
+})
+
+//商家信息获取结束
+export const shopMessageRes = (res) =>({
+    type:SHOP_MESSAGE_RES,
     data:res.data
 })

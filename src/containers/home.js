@@ -8,6 +8,7 @@ import config from '../config'
 import {optionDeal} from '../api/utils'
 import Header from '../components/common/header'
 import NavContent from '../components/home/navContent'
+import RecommendedStore from '../components/home/recommendedStore'
 
  class Home extends Component{
 
@@ -18,7 +19,7 @@ import NavContent from '../components/home/navContent'
     componentWillMount(){
     }
     componentDidMount(){
-        const options1 = optionDeal('get',{type:'group'}, config.GET_CUSTOMER_INFO)
+        const options1 = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO)
         this.props.initData(options1)
     }
     componentWillReceiveProps(nextProps){
@@ -35,15 +36,15 @@ import NavContent from '../components/home/navContent'
         // this.props.initData(options)
     }
     render(){
-        const {hotCity,locCity,allCity,navMessage} = this.props.dealInitData
+        const {hotCity,locCity,allCity,navMessage,shopList} = this.props.dealInitData
         return (
             <div>
                 <Header title='饿了么' city={locCity.name}/>
                 <NavContent message={navMessage}/>
                 <div>
-                    {/* {hotCity.map((_data,index) => <div className='component_container common_back' key={index+1}>{index+1}：{_data.name}</div>)} */}
-                    
-                </div>      
+                    <div className='shop-padding'>附近商家</div>
+                    <RecommendedStore shopMessage = {shopList}/> 
+                </div>   
                 <Link to = '/bless'>next</Link>
             </div>
             
