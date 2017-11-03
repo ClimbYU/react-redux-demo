@@ -7,6 +7,7 @@ import {initData} from '../actions'
 import config from '../config' 
 import {optionDeal} from '../api/utils'
 import Header from '../components/common/header'
+import Footer from '../components/common/footer'
 import NavContent from '../components/home/navContent'
 import RecommendedStore from '../components/home/recommendedStore'
 
@@ -45,7 +46,7 @@ import RecommendedStore from '../components/home/recommendedStore'
                     <div className='shop-padding'>附近商家</div>
                     <RecommendedStore shopMessage = {shopList}/> 
                 </div>   
-                <Link to = '/bless'>next</Link>
+                <Footer></Footer>
             </div>
             
         )
