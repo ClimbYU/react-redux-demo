@@ -34,7 +34,7 @@ export default class RecommendedStore extends Component{
                     </header>
                     <div className='assess-shop'>
                         <section>
-                            <span> ☆☆☆☆☆</span>
+                            <span className='shop-grade'> ☆☆☆☆☆</span>
                             <span>4.5</span>
                             <span>月售1232</span>
                         </section>
@@ -50,7 +50,7 @@ export default class RecommendedStore extends Component{
                         </section>
                         <section>
                             <div>2.91km / </div>
-                            <div>30分钟</div>
+                            <div> 30分钟</div>
                         </section>
                     </div>
             </hgroup>
