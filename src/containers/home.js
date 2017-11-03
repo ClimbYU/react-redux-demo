@@ -10,6 +10,7 @@ import Header from '../components/common/header'
 import Footer from '../components/common/footer'
 import NavContent from '../components/home/navContent'
 import RecommendedStore from '../components/home/recommendedStore'
+import SearchModule from '../components/home/searchModule'
 
  class Home extends Component{
 
@@ -41,6 +42,7 @@ import RecommendedStore from '../components/home/recommendedStore'
         return (
             <div>
                 <Header title='饿了么' city={locCity.name}/>
+                <SearchModule/>
                 <NavContent message={navMessage}/>
                 <div>
                     <div className='shop-padding'>附近商家</div>

@@ -1,0 +1,38 @@
+@import 'mixin';
+.search-address-food {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #3190e8;
+    .transform-weather {
+        @include hd();
+        padding: 10px 15px;
+    }
+    .search-shop {
+        display: flex;
+        justify-content: center;
+        padding-top: 3px;
+        padding-bottom: 13px;
+        input {
+            width: 90%;
+            border-radius: 14px;
+            height: 2rem;
+            text-align: center;
+        }
+        input::-webkit-input-placeholde {
+            text-align: center
+        }
+    }
+    .hot-foodlist {
+        font-size: 12px;
+        display: flex;
+        justify-content: space-around;
+        padding: 0 10px 6px 10px;
+    }
+    span {
+        color: white;
+    }
+    li {
+        color: white;
+    }
+}
