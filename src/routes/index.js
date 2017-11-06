@@ -20,14 +20,14 @@ const Bless = (location,cb) => {
 };
 
 // import Exchange from '../components/exchange/exchange'  
-const Exchange = (location,cb) => {
+const Food = (location,cb) => {
     require.ensure([],require => {
        /**
        * webpack支持es6，所以要用默认写法 require('../components/bless/bless').default 
        * 必须配合 getComponent 使用才可以使用 cb(null,Bless)
        */
-      cb(null, require('../containers/exchange').default)
-    },'exchange')
+      cb(null, require('../containers/food').default)
+    },'food')
 };
 
 // import Recharge from '../components/recharge/recharge'
@@ -68,7 +68,7 @@ const routes =
             <IndexRoute component={Home}/> 
          </Route>      
         <Route path = "/bless" getComponent = {Bless}/>
-        <Route path = "/exchange" getComponent = {Exchange}/>
+        <Route path = "/food/:type" getComponent = {Food}/>
         <Route path = "/recharge" getComponent = {Recharge}/>
         <Route path = "/signCard" getComponent = {SignCard}/>
         <Route path = "/user" getComponent = {User}/> 

@@ -1,7 +1,7 @@
 import React ,{ Component } from 'react'
 import { Link } from 'react-router'
 
-class Exchange extends Component{
+class Food extends Component{
     
     constructor (props) {
         super(props)
@@ -17,4 +17,4 @@ class Exchange extends Component{
     }
 }
 
-export default Exchange
+export default Food
