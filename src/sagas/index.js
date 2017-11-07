@@ -4,7 +4,8 @@ import {
   RECEIVE_POST,
   GET_CUSTOMER_INFO,
   SHOP_MESSAGE_GET,
-  LOC_GET_DATA
+  LOC_GET_DATA,
+  NAV_MESSAGE_GET
 } from '../actions/actionTypes'
 import{getMessageLoading,messageAllEnd,messageHotEnd,messageLocEnd,messageNav,shopMessageRes}from '../actions'
 import fetchData from '../api/fetchActions'
@@ -41,14 +42,9 @@ function* watchInitData(){
       while (true) {
         const {options} = yield take(GET_CUSTOMER_INFO);
         if(options){
-          // yield fork(getCityAll,options);
-          // const optionsHot = optionDeal('get',{type:'hot'}, config.GET_CUSTOMER_INFO);
-          // const optionsLoc = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO);
-          const optionNav = optionDeal('get',{}, config.GET_NAV_MESSAGE);
-          const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
-          // yield fork(getCityHot,optionsHot);
+          // const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
           yield fork(getCityLoc,options);
-          yield fork (getNavMessage,optionShop);
+          // yield fork (getNavMessage,optionShop);
         }
       }
 }
@@ -64,9 +60,19 @@ function* watchShopMessage(){
   }
 }
 
+function* watchNavMessage(){
+  while (true) {
+    const {option} = yield take(NAV_MESSAGE_GET);
+    if(option){
+      yield fork (getNavMessage,option);
+    }
+  }
+}
+
 export default function* root() {
     yield all([
       fork(watchInitData),
-      fork(watchShopMessage)
+      fork(watchShopMessage),
+      fork(watchNavMessage)
     ])
 }

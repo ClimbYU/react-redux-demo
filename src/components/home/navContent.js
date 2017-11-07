@@ -36,7 +36,7 @@ export default class NavContent extends Component{
         }
         
         const swiperContent = function(message){
-            return message.map((data,index) => <Link to={'food/' + data.id} key={index} className='food_container_type'>
+            return message.map((data,index) => <Link to={'food/' + index} key={index} className='food_container_type'>
             <figure>
                 <img src={config.IMG_BASE_URL + data.image_url}/>    
                 <figcaption>{data.title}</figcaption>

@@ -16,13 +16,13 @@ const initialState = {
     allCity:[],
     hotCity:[],
     locCity:{},
-    navMessage:[],
+    carouselMessage:[],
     shopList:[],
-    url:'pipeApi/recharge/queryRecharge'
+    url:''
 }
 
 
-const dealInitData = (state = initialState , actions) => {
+export const dealInitData = (state = initialState , actions) => {
     switch(actions.type){
         case SHOW_QUOTA :
             return Object.assign({}, state, {
@@ -42,7 +42,7 @@ const dealInitData = (state = initialState , actions) => {
             });
         case NAV_MESSAGE_RES :
             return Object.assign({}, state, {
-                navMessage: actions.data
+                carouselMessage: actions.data
         });
         case SHOP_MESSAGE_RES:
             return Object.assign({}, state, {
@@ -53,4 +53,9 @@ const dealInitData = (state = initialState , actions) => {
     }
 }
 
-export default dealInitData
+export const foodList = (state = initialState,actions) => {
+    switch(actions.type){
+        default :
+            return state
+    }
+}

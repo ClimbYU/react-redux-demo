@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import $$ from 'immutable'
 
-import {initData} from '../actions'
+import {initData,getCarouselMessage} from '../actions'
 import config from '../config' 
 import {optionDeal} from '../api/utils'
 import Header from '../components/common/header'
@@ -21,8 +21,15 @@ import SearchModule from '../components/home/searchModule'
     componentWillMount(){
     }
     componentDidMount(){
-        const options1 = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO)
-        this.props.initData(options1)
+        if(!this.props.dealInitData.locCity.name){
+            const options1 = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO)
+            this.props.initData(options1)
+        }
+        if(this.props.dealInitData.carouselMessage.length == 0){
+            const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
+            this.props.getCarouselMessage(optionShop);
+        }
+        
     }
     componentWillReceiveProps(nextProps){
         // console.log( nextProps === this.props) 
@@ -38,12 +45,12 @@ import SearchModule from '../components/home/searchModule'
         // this.props.initData(options)
     }
     render(){
-        const {hotCity,locCity,allCity,navMessage,shopList} = this.props.dealInitData
+        const {hotCity,locCity,allCity,carouselMessage,shopList} = this.props.dealInitData
         return (
             <div>
                 <Header title='饿了么' city={locCity.name}/>
                 <SearchModule/>
-                <NavContent message={navMessage}/>
+                <NavContent message={carouselMessage}/>
                 <div>
                     <div className='shop-padding'>附近商家</div>
                     <RecommendedStore shopMessage = {shopList}/> 
@@ -61,5 +68,5 @@ const mapStateToProps = (state) =>({
 
 export default connect(
     mapStateToProps,
-    {initData}
+    {initData,getCarouselMessage}
 )(Home)

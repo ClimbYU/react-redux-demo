@@ -11,7 +11,8 @@ import {
     LOC_GET_DATA,
     NAV_MESSAGE_RES,
     SHOP_MESSAGE_GET,
-    SHOP_MESSAGE_RES
+    SHOP_MESSAGE_RES,
+    NAV_MESSAGE_GET
 } from '../actions/actionTypes'
 
 export const requestPosts = data => ({
@@ -52,6 +53,11 @@ export const messageAllEnd = (res) => ({
 })
 
 //获取轮播信息
+
+export const getCarouselMessage = (option) =>({
+    type:NAV_MESSAGE_GET,
+    option
+})
 
 export const messageNav = (res) =>({
     type:NAV_MESSAGE_RES,
