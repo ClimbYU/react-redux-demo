@@ -91,3 +91,32 @@ figcaption,
 .shop-padding {
     padding: 15px;
 }
+
+// .header_display {
+//     display: flex;
+//     top: 3rem;
+//     position: fixed;
+//     width: 100%;
+//     justify-content: space-between;
+// }
+.header_display {
+    height: 2rem;
+    position: fixed;
+    width: 100%;
+    top: 3rem;
+    border-bottom: 1px solid #c7bbbb;
+    z-index: 999;
+    display: flex;
+    .border_food {
+        border-right: 1px solid #c7bbbb;
+    }
+    section {
+        display: flex;
+        align-items: center;
+        flex: auto;
+        justify-content: center;
+        span {
+            font-size: 13px;
+        }
+    }
+}

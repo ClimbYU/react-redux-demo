@@ -6,7 +6,8 @@ import $$ from 'immutable'
 import Header from '../components/common/header'
 import config from '../config' 
 import {optionDeal} from '../api/utils'
-import {getCarouselMessage} from '../actions'
+import {getCarouselMessage,initData} from '../actions'
+import Footer from '../components/common/footer'
 
 class Food extends Component{
     
@@ -25,6 +26,9 @@ class Food extends Component{
         if(this.props.dealInitData.carouselMessage.length == 0){
             const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
             this.props.getCarouselMessage(optionShop);
+        } if(!this.props.dealInitData.locCity.name){
+            const options1 = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO)
+            this.props.initData(options1)
         }
     }
 
@@ -36,8 +40,23 @@ class Food extends Component{
         }
         return (
             <div>
-               <Header title={title} city={locCity.name}/>
+               <Header title={title}city={locCity.name}/>
+               <div className='header_display'>
+                    <section className='border_food'>
+                        <span>{title}</span>
+                        <span>></span>
+                    </section>
+                    <section  className='border_food'>
+                        <span>智能排序</span>
+                        <span>></span>
+                    </section>
+                    <section>
+                        <span>筛选</span>
+                        <span>></span>
+                    </section>
+                </div>
                
+               <Footer></Footer>
             </div>        
         )
     }
@@ -49,6 +68,6 @@ const mapStateToProps = (state) =>({
 
 export default connect(
     mapStateToProps,
-    {getCarouselMessage}
+    {getCarouselMessage,initData}
 )(Food)
 
