@@ -26,7 +26,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, compose, createStore } from 'redux'
-import {browserHistory, Router ,Route} from 'react-router';
+import {browserHistory, Router ,Route,hashHistory } from 'react-router';
 //react-router-redux用于处理redux与react-router协同工作
 import { syncHistoryWithStore } from 'react-router-redux';
 
@@ -41,7 +41,8 @@ import './styles/common1.css';
 
 
 const store = configureStore()
-const history = syncHistoryWithStore(browserHistory, store)
+// const history = syncHistoryWithStore(browserHistory, store)
+const history = hashHistory;
 
 ReactDOM.render (
       <Provider store={store}>            
