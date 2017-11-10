@@ -107,16 +107,20 @@ figcaption,
     border-bottom: 1px solid #c7bbbb;
     z-index: 999;
     display: flex;
-    .border_food {
-        border-right: 1px solid #c7bbbb;
-    }
-    section {
+    div {
         display: flex;
-        align-items: center;
         flex: auto;
-        justify-content: center;
-        span {
-            font-size: 13px;
+        .border_food {
+            display: flex;
+            align-items: center;
+            flex: auto;
+            justify-content: center;
+            span {
+                font-size: 13px;
+            }
+        }
+        .border_right {
+            border-right: 1px solid #c7bbbb;
         }
     }
 }

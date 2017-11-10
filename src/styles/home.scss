@@ -1,0 +1,39 @@
+.food_shop_list {
+    position: fixed;
+    top: 5rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    transition: all 3s;
+    .shop_list {
+        flex: auto;
+        background-color: #f1f1f1;
+        .shop_list_unit {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.7rem;
+            font-size: 13px;
+        }
+    }
+    .food_list {
+        flex: auto;
+        .food_list_unit {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.7rem;
+            font-size: 13px;
+            border-bottom: 1px solid #c7bbbb;
+        }
+    }
+}
+
+@keyframes food_shop_list {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 1;
+    }
+}

@@ -8,6 +8,7 @@ import config from '../config'
 import {optionDeal} from '../api/utils'
 import {getCarouselMessage,initData} from '../actions'
 import Footer from '../components/common/footer'
+import '../styles/home.scss'
 
 class Food extends Component{
     
@@ -42,17 +43,82 @@ class Food extends Component{
             <div>
                <Header title={title}city={locCity.name}/>
                <div className='header_display'>
-                    <section className='border_food'>
-                        <span>{title}</span>
-                        <span>></span>
+                   
+                    <div>
+                        <section className='border_food border_right'>
+                            <span>{title}</span>
+                            <span>></span>
+                        </section>
+                    </div>
+                    <div>
+                        <section  className='border_food  border_right'>
+                            <span>智能排序</span>
+                            <span>></span>
+                        </section>
+                    </div>
+                    <div>
+                        <section className='border_food'>
+                            <span>筛选</span>
+                            <span>></span>
+                        </section>
+                    </div>
+                </div>
+                <div className='food_shop_list'>
+                    <section className='shop_list'>
+                        <ul>
+                            <li className='shop_list_unit'>
+                                <section>
+                                    <span>全部商家</span>
+                                </section>
+                                <section>
+                                    <span>354</span>
+                                </section>
+                            </li>
+                            <li className='shop_list_unit'>
+                                <section>
+                                    <span>全部商家</span>
+                                </section>
+                                <section>
+                                    <span>354</span>
+                                </section>
+                            </li>
+                            <li className='shop_list_unit'>
+                                <section>
+                                    <span>全部商家</span>
+                                </section>
+                                <section>
+                                    <span>354</span>
+                                </section>
+                            </li>
+                        </ul>
                     </section>
-                    <section  className='border_food'>
-                        <span>智能排序</span>
-                        <span>></span>
-                    </section>
-                    <section>
-                        <span>筛选</span>
-                        <span>></span>
+                    <section className='food_list'>
+                        <ul>
+                            <li  className='food_list_unit'>
+                                <section>
+                                    <span>水果</span>
+                                </section>
+                                <section>
+                                    <span>354</span>
+                                </section>
+                            </li>
+                            <li className='food_list_unit'>
+                                <section>
+                                    <span>沙拉</span>
+                                </section>
+                                <section>
+                                    <span>354</span>
+                                </section>
+                            </li>
+                            <li className='food_list_unit'>
+                                <section>
+                                    <span>奶茶</span>
+                                </section>
+                                <section>
+                                    <span>354</span>
+                                </section>
+                            </li>
+                        </ul>
                     </section>
                 </div>
                

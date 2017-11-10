@@ -51,8 +51,8 @@ module.exports = merge(baseWebpackConfig, {
          * 热更新  只有在js改变时才会进行更新
          */
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
-        // new webpack.NoEmitOnErrorsPlugin(),
+        // new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         /**
          * 自动生成html
          */
