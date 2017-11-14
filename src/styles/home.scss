@@ -4,7 +4,8 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    transition: all 3s;
+    // transition: all 3s;
+    animation: food_shop_list_animation 0.5s;
     .shop_list {
         flex: auto;
         background-color: #f1f1f1;
@@ -27,13 +28,18 @@
     }
 }
 
-@keyframes food_shop_list {
+@keyframes food_shop_list_animation {
     0% {
-        transform: translateY(0);
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    50% {
+        // transform: translateY(50%);
         opacity: 0;
     }
     100% {
-        transform: translateY(100%);
+        transform: translateY(0);
         opacity: 1;
+        // top: 5rem;
     }
 }

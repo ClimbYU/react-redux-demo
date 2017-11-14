@@ -85,6 +85,9 @@ const config = {
                           sourceMap: true,
                       },
                     },
+                    {
+                        loader: 'postcss-loader'
+                    }
                   ],
                   fallback: 'style-loader',
                 }),
