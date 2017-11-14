@@ -16,7 +16,24 @@ class Food extends Component{
         super(props);
         this.state = {
             index:parseInt(this.props.params.type),
+            shopShow:'none',
+            showFoodList:'food_shop_list_hide'
         }
+    }
+
+    foodList(state){ 
+        if(state == 'food_shop_list_hide'){
+            this.setState({
+                shopShow:'flex',
+                showFoodList:'food_shop_list'
+            })
+        }else{
+            this.setState({
+                shopShow:'null',
+                showFoodList:'food_shop_list_hide'
+            })
+        }
+        
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -39,12 +56,14 @@ class Food extends Component{
         if(carouselMessage[this.state.index] &&　title == ''){
              title = carouselMessage[this.state.index].title
         }
+        var shopShow = this.state.shopShow;
+        var showFoodList = this.state.showFoodList;
         return (
             <div>
                <Header title={title}city={locCity.name}/>
                <div className='header_display'>
                    
-                    <div>
+                    <div  onClick={this.foodList.bind(this,showFoodList)}>
                         <section className='border_food border_right'>
                             <span>{title}</span>
                             <span>></span>
@@ -63,7 +82,7 @@ class Food extends Component{
                         </section>
                     </div>
                 </div>
-                <div className='food_shop_list'>
+                <div className={showFoodList} style={{display:shopShow}}>
                     <section className='shop_list'>
                         <ul>
                             <li className='shop_list_unit'>

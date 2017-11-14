@@ -7,3 +7,32 @@
     text-align: $font;
     font-size: $size;
 }
+
+@mixin list-show($animation) {
+    position: fixed;
+    top: 5rem;
+    width: 100%;
+    justify-content: space-between;
+    // transition: all 3s;
+    animation: $animation;
+    .shop_list {
+        flex: auto;
+        background-color: #f1f1f1;
+        .shop_list_unit {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.7rem;
+            font-size: 13px;
+        }
+    }
+    .food_list {
+        flex: auto;
+        .food_list_unit {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.7rem;
+            font-size: 13px;
+            border-bottom: 1px solid #c7bbbb;
+        }
+    }
+}

@@ -1,31 +1,11 @@
+@import 'mixin';
 .food_shop_list {
-    position: fixed;
-    top: 5rem;
+    @include list-show(food_shop_list_animation 0.3s);
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-    // transition: all 3s;
-    animation: food_shop_list_animation 0.5s;
-    .shop_list {
-        flex: auto;
-        background-color: #f1f1f1;
-        .shop_list_unit {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.7rem;
-            font-size: 13px;
-        }
-    }
-    .food_list {
-        flex: auto;
-        .food_list_unit {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.7rem;
-            font-size: 13px;
-            border-bottom: 1px solid #c7bbbb;
-        }
-    }
+}
+
+.food_shop_list_hide {
+    @include list-show(food_shop_list_animation_hide 0.3s);
 }
 
 @keyframes food_shop_list_animation {
@@ -41,5 +21,21 @@
         transform: translateY(0);
         opacity: 1;
         // top: 5rem;
+    }
+}
+
+@keyframes food_shop_list_animation_hide {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        // transform: translateY(50%);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
     }
 }
