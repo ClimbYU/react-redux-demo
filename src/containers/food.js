@@ -6,7 +6,7 @@ import $$ from 'immutable'
 import Header from '../components/common/header'
 import config from '../config' 
 import {optionDeal} from '../api/utils'
-import {getCarouselMessage,initData} from '../actions'
+import {getCarouselMessage,initData,getRestaurant} from '../actions'
 import Footer from '../components/common/footer'
 import '../styles/home.scss'
 
@@ -29,7 +29,7 @@ class Food extends Component{
             })
         }else{
             this.setState({
-                shopShow:'null',
+                shopShow:'none',
                 showFoodList:'food_shop_list_hide'
             })
         }
@@ -42,12 +42,23 @@ class Food extends Component{
 
     componentDidMount(){
         if(this.props.dealInitData.carouselMessage.length == 0){
+            // 获取导航栏的信息
             const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
             this.props.getCarouselMessage(optionShop);
         } if(!this.props.dealInitData.locCity.name){
+            // 获取所在位置信息
             const options1 = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO)
             this.props.initData(options1)
+        }if(this.props.dealInitData.locCity.latitude){
+            //获取下拉列表信息
+            const options1 = optionDeal('get',
+                        {latitude:this.props.dealInitData.locCity.latitude, longitude:this.props.dealInitData.locCity.longitude},config.GET_RESTAURANT_INFO)
+            this.props.getRestaurant(options1)
         }
+    }
+
+    componentDidUpdate(){
+        
     }
 
     render(){
@@ -153,6 +164,6 @@ const mapStateToProps = (state) =>({
 
 export default connect(
     mapStateToProps,
-    {getCarouselMessage,initData}
+    {getCarouselMessage,initData,getRestaurant}
 )(Food)
 

@@ -12,7 +12,9 @@ import {
     NAV_MESSAGE_RES,
     SHOP_MESSAGE_GET,
     SHOP_MESSAGE_RES,
-    NAV_MESSAGE_GET
+    NAV_MESSAGE_GET,
+    RESTAURANT_MESSAGE_GET,
+    RESTAURANT_MESSAGE_RES
 } from '../actions/actionTypes'
 
 export const requestPosts = data => ({
@@ -68,9 +70,16 @@ export const shopMessage = (option) =>({
     type:SHOP_MESSAGE_GET,
     option
 })
-
-//商家信息获取结束
 export const shopMessageRes = (res) =>({
     type:SHOP_MESSAGE_RES,
+    data:res.data
+})
+// 获取食物页面下拉列表信息
+export const getRestaurant = (option) => ({
+    type:RESTAURANT_MESSAGE_GET,
+    option
+})
+export const getRestaurantRes = (res) => ({
+    type:RESTAURANT_MESSAGE_RES,
     data:res.data
 })

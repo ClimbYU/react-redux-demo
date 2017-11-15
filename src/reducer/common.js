@@ -7,7 +7,8 @@ import {
     HOT_GET_DATA,
     LOC_GET_DATA,
     NAV_MESSAGE_RES,
-    SHOP_MESSAGE_RES
+    SHOP_MESSAGE_RES,
+    RESTAURANT_MESSAGE_RES
 } from '../actions/actionTypes'
 
 
@@ -18,7 +19,8 @@ const initialState = {
     locCity:{},
     carouselMessage:[],
     shopList:[],
-    url:''
+    url:'',
+    RestaurantList:[]
 }
 
 
@@ -55,6 +57,10 @@ export const dealInitData = (state = initialState , actions) => {
 
 export const foodList = (state = initialState,actions) => {
     switch(actions.type){
+        case RESTAURANT_MESSAGE_RES:
+            return Object.assign({}, state, {
+                RestaurantList: actions.data
+        });
         default :
             return state
     }

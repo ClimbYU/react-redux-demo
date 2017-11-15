@@ -5,9 +5,18 @@ import {
   GET_CUSTOMER_INFO,
   SHOP_MESSAGE_GET,
   LOC_GET_DATA,
-  NAV_MESSAGE_GET
+  NAV_MESSAGE_GET,
+  RESTAURANT_MESSAGE_GET
 } from '../actions/actionTypes'
-import{getMessageLoading,messageAllEnd,messageHotEnd,messageLocEnd,messageNav,shopMessageRes}from '../actions'
+import{
+  getMessageLoading,
+  messageAllEnd,
+  messageHotEnd,
+  messageLocEnd,
+  messageNav,
+  shopMessageRes,
+  getRestaurantRes
+}from '../actions'
 import fetchData from '../api/fetchActions'
 import {optionDeal} from '../api/utils'
 import config from '../config' 
@@ -38,6 +47,13 @@ function* getShop(options){
   const message = yield call(fetchData,options);
   yield put (shopMessageRes(message))
 }
+// 获取食物页面下拉列表信息
+function* getRestaurant(options){
+  const message = yield call(fetchData,options);
+  yield put (getRestaurantRes(message))
+}
+
+//初始化信息
 function* watchInitData(){
       while (true) {
         const {options} = yield take(GET_CUSTOMER_INFO);
@@ -59,10 +75,20 @@ function* watchShopMessage(){
     }
   }
 }
-
+//获取首页轮播图信息
 function* watchNavMessage(){
   while (true) {
     const {option} = yield take(NAV_MESSAGE_GET);
+    if(option){
+      yield fork (getNavMessage,option);
+    }
+  }
+}
+
+// 获取食物页下拉列表信息
+function* watchRestaurantMessage(){
+  while(true){
+    const {option} = yield take(RESTAURANT_MESSAGE_GET);
     if(option){
       yield fork (getNavMessage,option);
     }
@@ -73,6 +99,7 @@ export default function* root() {
     yield all([
       fork(watchInitData),
       fork(watchShopMessage),
-      fork(watchNavMessage)
+      fork(watchNavMessage),
+      fork(watchRestaurantMessage)
     ])
 }
