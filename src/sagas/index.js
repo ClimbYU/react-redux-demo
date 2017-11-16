@@ -90,7 +90,7 @@ function* watchRestaurantMessage(){
   while(true){
     const {option} = yield take(RESTAURANT_MESSAGE_GET);
     if(option){
-      yield fork (getNavMessage,option);
+      yield fork (getRestaurant,option);
     }
   }
 }

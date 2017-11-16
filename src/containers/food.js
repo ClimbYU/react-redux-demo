@@ -5,7 +5,7 @@ import $$ from 'immutable'
 
 import Header from '../components/common/header'
 import config from '../config' 
-import {optionDeal} from '../api/utils'
+import {optionDeal,getImageUrl} from '../api/utils'
 import {getCarouselMessage,initData,getRestaurant} from '../actions'
 import Footer from '../components/common/footer'
 import '../styles/home.scss'
@@ -49,7 +49,8 @@ class Food extends Component{
             // 获取所在位置信息
             const options1 = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO)
             this.props.initData(options1)
-        }if(this.props.dealInitData.locCity.latitude){
+        }
+        if(this.props.dealInitData.locCity.latitude){
             //获取下拉列表信息
             const options1 = optionDeal('get',
                         {latitude:this.props.dealInitData.locCity.latitude, longitude:this.props.dealInitData.locCity.longitude},config.GET_RESTAURANT_INFO)
@@ -63,6 +64,19 @@ class Food extends Component{
 
     render(){
         const {locCity,carouselMessage} = this.props.dealInitData
+        const {RestaurantList} = this.props.foodList
+        console.log(RestaurantList)
+        const restaurantMessage =  RestaurantList.map((restaurant,index) => 
+                <li className='shop_list_unit' key={index}>
+                    <section>
+                        <img className='restaurant_style' src={getImageUrl(restaurant.image_url)} />
+                        <span>{restaurant.name}</span>
+                    </section>
+                    <section>
+                        <span>{restaurant.count}</span>
+                    </section>
+                </li>
+        ) 
         let title = ''
         if(carouselMessage[this.state.index] &&　title == ''){
              title = carouselMessage[this.state.index].title
@@ -96,30 +110,7 @@ class Food extends Component{
                 <div className={showFoodList} style={{display:shopShow}}>
                     <section className='shop_list'>
                         <ul>
-                            <li className='shop_list_unit'>
-                                <section>
-                                    <span>全部商家</span>
-                                </section>
-                                <section>
-                                    <span>354</span>
-                                </section>
-                            </li>
-                            <li className='shop_list_unit'>
-                                <section>
-                                    <span>全部商家</span>
-                                </section>
-                                <section>
-                                    <span>354</span>
-                                </section>
-                            </li>
-                            <li className='shop_list_unit'>
-                                <section>
-                                    <span>全部商家</span>
-                                </section>
-                                <section>
-                                    <span>354</span>
-                                </section>
-                            </li>
+                            {restaurantMessage}
                         </ul>
                     </section>
                     <section className='food_list'>
@@ -159,7 +150,8 @@ class Food extends Component{
 }
 
 const mapStateToProps = (state) =>({
-    dealInitData:state.dealInitData
+    dealInitData:state.dealInitData,
+    foodList:state.foodList
 });
 
 export default connect(

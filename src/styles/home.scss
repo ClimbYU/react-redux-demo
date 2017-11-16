@@ -2,6 +2,9 @@
 .food_shop_list {
     @include list-show(food_shop_list_animation 0.3s);
     display: flex;
+    height: 21rem;
+    overflow: hidden;
+    background: #eeeaf3;
 }
 
 .food_shop_list_hide {
@@ -21,6 +24,15 @@
         transform: translateY(0);
         opacity: 1;
         // top: 5rem;
+    }
+}
+
+.shop_list_unit {
+    .restaurant_style {
+        width: 1.2rem;
+        height: 1.2rem;
+        vertical-align: middle;
+        margin-right: 0.5rem
     }
 }
 
