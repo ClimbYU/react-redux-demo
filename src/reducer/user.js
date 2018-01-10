@@ -10,21 +10,25 @@ import {
     SHOP_MESSAGE_RES,
     RESTAURANT_MESSAGE_RES
 } from '../actions/actionTypes'
+import Immutable from 'immutable';
 
-
-const initialState = {
-    data:[],
+// const initialState = {
+//     data:[],
+//     allCity:[],
+//     hotCity:[],
+//     locCity:{},
+//     carouselMessage:[],
+//     shopList:[],
+//     url:'',
+//     RestaurantList:[]
+// }
+const initialState = Immutable.fromJS({
     allCity:[],
     hotCity:[],
     locCity:{},
-    carouselMessage:[],
-    shopList:[],
-    url:'',
-    RestaurantList:[]
-}
+})
 
-
-export const dealInitData = (state = initialState , actions) => {
+export const user = (state = initialState , actions) => {
     switch(actions.type){
         case SHOW_QUOTA :
             return Object.assign({}, state, {
@@ -39,9 +43,10 @@ export const dealInitData = (state = initialState , actions) => {
                 hotCity: actions.data
             }); 
         case LOC_GET_DATA :
-            return Object.assign({}, state, {
-                locCity: actions.data
-            });
+            // return Object.assign({}, state, {
+            //     locCity: actions.data
+            // });
+            return state.set('locCity',actions.data)
         case NAV_MESSAGE_RES :
             return Object.assign({}, state, {
                 carouselMessage: actions.data

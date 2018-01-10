@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-import {dealInitData,foodList} from './common'
+import {user,foodList} from './user'
 
 export default combineReducers({
-    dealInitData,
-    foodList,
+    user:user,
+    foodList:foodList,
     //必须加上routing才能渲染成功
     routing: routerReducer
 })

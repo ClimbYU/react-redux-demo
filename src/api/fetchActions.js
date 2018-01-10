@@ -1,5 +1,7 @@
 import axios from 'axios'
 import lodash from 'lodash'
+import { fromJS } from "immutable";
+
 import {URLADDRESS} from '../config'
 import {
     REQUEST_POST,
@@ -45,7 +47,9 @@ const getData = (options) => {
 export default function fetchData(options) {
     return getData(options)
             .then(
-                response => response
+               (response) => {
+                 return fromJS(response.data)
+                }
              )
             .catch((err) =>{
                 console.log(err)
