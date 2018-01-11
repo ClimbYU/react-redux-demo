@@ -10,6 +10,7 @@ export default function configureStore() {
     // applyMiddleware(
     //   sagaMiddleware
     // ),
+    /**************** 增加redux-devtools插件*************/
     compose(applyMiddleware(sagaMiddleware),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()) 
   );
   sagaMiddleware.run(rootSaga);

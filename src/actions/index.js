@@ -36,12 +36,22 @@ export const initData = (options) =>({
 export const getMessageLoading = () => ({
     type:START_GET_DATA
 })
-//调用接口结束
+/**
+ * 
+ * @param {位置坐标} res 
+ */
 export const messageLocEnd = (res) => ({
     type:LOC_GET_DATA,
     data:res
 })
-
+/**
+ * 
+ * @param {餐馆列表} res 
+ */
+export const shopMessageRes = (res) =>({
+    type:SHOP_MESSAGE_RES,
+    data:res
+})
 //调用接口结束
 export const messageHotEnd = (res) => ({
     type:HOT_GET_DATA,
@@ -63,17 +73,14 @@ export const getCarouselMessage = (option) =>({
 
 export const messageNav = (res) =>({
     type:NAV_MESSAGE_RES,
-    data:res.data
+    data:res
 })
 //获取商家信息
 export const shopMessage = (option) =>({
     type:SHOP_MESSAGE_GET,
     option
 })
-export const shopMessageRes = (res) =>({
-    type:SHOP_MESSAGE_RES,
-    data:res.data
-})
+
 // 获取食物页面下拉列表信息
 export const getRestaurant = (option) => ({
     type:RESTAURANT_MESSAGE_GET,

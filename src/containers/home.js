@@ -21,14 +21,14 @@ import SearchModule from '../components/home/searchModule'
     componentWillMount(){
     }
     componentDidMount(){
-        // if(!this.props.user.get('locCity')){
+        if(this.props.user.get('locCity').isEmpty()){
             const options1 = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO)
             this.props.initData(options1)
-        // }
-        // if(this.props.dealInitData.carouselMessage.length == 0){
-        //     const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
-        //     this.props.getCarouselMessage(optionShop);
-        // }
+        }
+        if(this.props.foods.get('carouselMessage').isEmpty()){
+            const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
+            this.props.getCarouselMessage(optionShop);
+        }
         
     }
     componentWillReceiveProps(nextProps){
@@ -45,15 +45,18 @@ import SearchModule from '../components/home/searchModule'
         // this.props.initData(options)
     }
     render(){
-        // const {hotCity,locCity,allCity,carouselMessage,shopList} = this.props.user
+        const {user,initData,getCarouselMessage,foods} = this.props;
+        const localName =  user.get('locCity').isEmpty() ? '' : user.getIn(['locCity','name']);
+        const carouselMessage = foods.get('carouselMessage');
+        const restaurantList = foods.get('restaurantList');
         return (
             <div>
-                <Header title='饿了么' city={this.props.user.getIn(['locCity','name'])}/>
-                {/*<SearchModule/>
-                <NavContent message={carouselMessage}/>*/}
+                {<Header title='饿了么' city={localName}/>}
+                <SearchModule/>
+                <NavContent message={carouselMessage}/>
                 <div>
                     <div className='shop-padding'>附近商家</div>
-                    {/*<RecommendedStore shopMessage = {shopList}/> */}
+                    <RecommendedStore shopMessage = {restaurantList}/>
                 </div>   
                 <Footer></Footer>
             </div>
@@ -63,7 +66,8 @@ import SearchModule from '../components/home/searchModule'
 }
 
 const mapStateToProps = (state) =>({
-    user:state.user
+    user:state.user,
+    foods:state.foods
 });
 
 export default connect(

@@ -23,7 +23,7 @@ export default class RecommendedStore extends Component{
     render(){
         const shopList = this.props.shopMessage.map((shop,index) => <li key={index}>
             <section>
-                <img src={config.URLADDRESS + 'img/'+shop.image_path} alt=""/>
+                <img src={config.URLADDRESS + 'img/'+shop.get('image_path')} alt=""/>
             </section>
             <hgroup>
                     <header>

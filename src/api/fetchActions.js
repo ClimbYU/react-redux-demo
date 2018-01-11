@@ -49,6 +49,7 @@ export default function fetchData(options) {
             .then(
                (response) => {
                  return fromJS(response.data)
+                //  return response.data
                 }
              )
             .catch((err) =>{

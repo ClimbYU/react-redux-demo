@@ -1,5 +1,5 @@
 import { call, put, fork, take, all } from 'redux-saga/effects';
-import { fromJS } from "immutable";
+import { fromJS ,toJS} from "immutable";
 import {
   REQUEST_POST,
   RECEIVE_POST,
@@ -55,7 +55,6 @@ function* getCityLoc(options){
  * @param {*} options 
  */
 function* getNavMessage(options){
-  debugger;
     const message = yield call(fetchData,options);
     yield put (messageNav(message))
 }
@@ -95,7 +94,7 @@ function* watchInitData(){
 function* watchShopMessage(){
   while(true){
     const res = yield take(LOC_GET_DATA);
-    const {latitude,longitude} = res.data;
+    const {latitude,longitude} = res.data.toJS();
     const options = optionDeal('get',{latitude:latitude,longitude:longitude}, config.GET_SHOP_INFO)
     if(options){
       yield fork(getShop,options)

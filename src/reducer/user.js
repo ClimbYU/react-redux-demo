@@ -28,45 +28,30 @@ const initialState = Immutable.fromJS({
     locCity:{},
 })
 
-export const user = (state = initialState , actions) => {
+const user = (state = initialState , actions) => {
     switch(actions.type){
         case SHOW_QUOTA :
             return Object.assign({}, state, {
                 data: actions.data
             });
         case ALL_GET_DATA :
-            return Object.assign({}, state, {
-                allCity: actions.data
-            });   
+            // return Object.assign({}, state, {
+            //     allCity: actions.data
+            // });   
+            return state.set('allCity',actions.data)
         case HOT_GET_DATA :
-            return Object.assign({}, state, {
-                hotCity: actions.data
-            }); 
+            // return Object.assign({}, state, {
+            //     hotCity: actions.data
+            // }); 
+            return state.set('hotCity',actions.data)
         case LOC_GET_DATA :
             // return Object.assign({}, state, {
             //     locCity: actions.data
             // });
-            return state.set('locCity',actions.data)
-        case NAV_MESSAGE_RES :
-            return Object.assign({}, state, {
-                carouselMessage: actions.data
-        });
-        case SHOP_MESSAGE_RES:
-            return Object.assign({}, state, {
-                shopList: actions.data
-        });         
+            return state.set('locCity',actions.data)      
         default :
             return state
     }
 }
 
-export const foodList = (state = initialState,actions) => {
-    switch(actions.type){
-        case RESTAURANT_MESSAGE_RES:
-            return Object.assign({}, state, {
-                RestaurantList: actions.data
-        });
-        default :
-            return state
-    }
-}
+export default user

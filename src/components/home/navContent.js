@@ -30,7 +30,7 @@ export default class NavContent extends Component{
     }
     render(){
         const navMessage = [];
-        const navLength = this.props.message.length;
+        const navLength = this.props.message.size;
         for (let i = 0, j = 0; i < navLength; i += 8, j++) {
             navMessage[j] = this.props.message.splice(0, 8);
         }
@@ -38,8 +38,8 @@ export default class NavContent extends Component{
         const swiperContent = function(message){
             return message.map((data,index) => <Link to={'food/' + index} key={index} className='food_container_type'>
             <figure>
-                <img src={config.IMG_BASE_URL + data.image_url}/>    
-                <figcaption>{data.title}</figcaption>
+                <img src={config.IMG_BASE_URL + data.get('image_url')}/>    
+                <figcaption>{data.get('title')}</figcaption>
             </figure>    
         </Link>)
         } 
