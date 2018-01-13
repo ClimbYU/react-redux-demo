@@ -7,13 +7,16 @@ import {
   SHOP_MESSAGE_GET,
   LOC_GET_DATA,
   NAV_MESSAGE_GET,
-  RESTAURANT_MESSAGE_GET
+  RESTAURANT_MESSAGE_GET,
+  GET_CUSTOMER_INFO_RE,
+  LOC_GET_DATA_RE
 } from '../actions/actionTypes'
 import{
   getMessageLoading,
   messageAllEnd,
   messageHotEnd,
   messageLocEnd,
+  messageLocRe,
   messageNav,
   shopMessageRes,
   getRestaurantRes
@@ -46,9 +49,14 @@ function* getCityHot(options){
  * 获取位置信息
  * @param {*} options 
  */
-function* getCityLoc(options){
+function* getCityLoc(options,flag){
   const data = yield call(fetchData,options)
-  yield put(messageLocEnd(data))
+  if(flag){
+    yield put(messageLocRe(data))
+  }else{
+    yield put(messageLocEnd(data))
+  }
+  
 }
 /**
  * 获取翻页信息
@@ -88,6 +96,21 @@ function* watchInitData(){
         }
       }
 }
+
+/**
+ *刷新页面时初始化信息
+ */
+function* watchInitDataRe(){
+  while (true) {
+    const {options} = yield take(GET_CUSTOMER_INFO_RE);
+    if(options){
+      // const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
+      yield fork(getCityLoc,options,'re');
+      // yield fork (getNavMessage,optionShop);
+    }
+  }
+}
+
 /**
  * 监听获取店铺信息
  */
@@ -95,9 +118,23 @@ function* watchShopMessage(){
   while(true){
     const res = yield take(LOC_GET_DATA);
     const {latitude,longitude} = res.data.toJS();
-    const options = optionDeal('get',{latitude:latitude,longitude:longitude}, config.GET_SHOP_INFO)
+    const options = optionDeal('get',{latitude:latitude,longitude:longitude}, config.GET_SHOP_INFO);
     if(options){
       yield fork(getShop,options)
+    }
+  }
+}
+/**
+ * 
+ */
+function* watchDropListMessage(){
+  while(true){
+    const res = yield take(LOC_GET_DATA_RE);
+    console.log(res)
+    const {latitude,longitude} = res.data.toJS();
+    const options = optionDeal('get',{latitude:latitude,longitude:longitude}, config.GET_RESTAURANT_INFO);
+    if(options){
+      yield fork(getRestaurant,options)
     }
   }
 }
@@ -133,7 +170,9 @@ export default function* root() {
       // 通常fork 和 cancel配合使用， 实现非阻塞任务，take是阻塞状态，也就是实现执行take时候，
       // 无法向下继续执行，fork是非阻塞的，同样可以使用cancel取消一个fork 任务。
       fork(watchInitData),
+      fork(watchInitDataRe),
       fork(watchShopMessage),
+      fork(watchDropListMessage),
       fork(watchNavMessage),
       fork(watchRestaurantMessage)
     ])

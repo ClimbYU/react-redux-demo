@@ -14,7 +14,9 @@ import {
     SHOP_MESSAGE_RES,
     NAV_MESSAGE_GET,
     RESTAURANT_MESSAGE_GET,
-    RESTAURANT_MESSAGE_RES
+    RESTAURANT_MESSAGE_RES,
+    GET_CUSTOMER_INFO_RE,
+    LOC_GET_DATA_RE
 } from '../actions/actionTypes'
 
 export const requestPosts = data => ({
@@ -27,9 +29,20 @@ export const receivePosts = (data,json) =>({
     data,
     userInfo:json
 })
-
+/**
+ * 首页时获取位置信息
+ * @param {获取位置信息入参} options 
+ */
 export const initData = (options) =>({
     type:GET_CUSTOMER_INFO,
+    options
+})
+/**
+ * 非首页时刷新获取位置信息
+ * @param {获取位置信息入参} options 
+ */
+export const initDataFreshen = (options) =>({
+    type:GET_CUSTOMER_INFO_RE,
     options
 })
 //开始调用接口出来加载框
@@ -42,6 +55,14 @@ export const getMessageLoading = () => ({
  */
 export const messageLocEnd = (res) => ({
     type:LOC_GET_DATA,
+    data:res
+})
+/**
+ * 刷新时获取位置信息
+ * @param {位置坐标} res 
+ */
+export const messageLocRe = (res) => ({
+    type:LOC_GET_DATA_RE,
     data:res
 })
 /**

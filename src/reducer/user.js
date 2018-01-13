@@ -6,6 +6,7 @@ import {
     ALL_GET_DATA,
     HOT_GET_DATA,
     LOC_GET_DATA,
+    LOC_GET_DATA_RE,
     NAV_MESSAGE_RES,
     SHOP_MESSAGE_RES,
 } from '../actions/actionTypes'
@@ -44,10 +45,10 @@ const user = (state = initialState , actions) => {
             // }); 
             return state.set('hotCity',actions.data)
         case LOC_GET_DATA :
-            // return Object.assign({}, state, {
-            //     locCity: actions.data
-            // });
             return state.set('locCity',actions.data)      
+            //刷新是获取信息
+        case LOC_GET_DATA_RE :
+            return state.set('locCity',actions.data)     
         default :
             return state
     }
