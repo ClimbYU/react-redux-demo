@@ -8,7 +8,6 @@ import {
     LOC_GET_DATA,
     NAV_MESSAGE_RES,
     SHOP_MESSAGE_RES,
-    RESTAURANT_MESSAGE_RES
 } from '../actions/actionTypes'
 import Immutable from 'immutable';
 

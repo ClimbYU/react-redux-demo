@@ -88,5 +88,5 @@ export const getRestaurant = (option) => ({
 })
 export const getRestaurantRes = (res) => ({
     type:RESTAURANT_MESSAGE_RES,
-    data:res.data
+    data:res
 })

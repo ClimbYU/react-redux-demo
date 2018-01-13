@@ -41,51 +41,56 @@ class Food extends Component{
     }
 
     componentDidMount(){
-        if(this.props.dealInitData.carouselMessage.length == 0){
+        if(this.props.foods.get('carouselMessage').size == 0){
             // 获取导航栏的信息
             const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
             this.props.getCarouselMessage(optionShop);
-        } if(!this.props.dealInitData.locCity.name){
+        } 
+        if(!this.props.user.getIn(['locCity','name'])){
             // 获取所在位置信息
             const options1 = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO)
             this.props.initData(options1)
         }
-        if(this.props.dealInitData.locCity.latitude){
+       
+    }
+
+    componentDidUpdate(){
+        if(this.props.user.getIn(['locCity','latitude']) && 
+        this.props.user.getIn(['locCity','longitude']) && this.props.foods.get('dropdownList').size === 0){
             //获取下拉列表信息
             const options1 = optionDeal('get',
-                        {latitude:this.props.dealInitData.locCity.latitude, longitude:this.props.dealInitData.locCity.longitude},config.GET_RESTAURANT_INFO)
+                        {latitude:this.props.user.getIn(['locCity','latitude']), longitude:this.props.user.getIn(['locCity','longitude'])},config.GET_RESTAURANT_INFO)
             this.props.getRestaurant(options1)
         }
     }
 
-    componentDidUpdate(){
-        
-    }
-
     render(){
-        const {locCity,carouselMessage} = this.props.dealInitData
-        const {RestaurantList} = this.props.foodList
-        console.log(RestaurantList)
-        const restaurantMessage =  RestaurantList.map((restaurant,index) => 
+        // const {locCity,carouselMessage} = this.props.dealInitData
+        const {user,foods} = this.props
+        const restaurantList = foods.get('restaurantList')
+        const carouselMessage = foods.get('carouselMessage');
+        const dropdownList = foods.get('dropdownList');
+        const restaurantMessage =  dropdownList.map((restaurant,index) => 
                 <li className='shop_list_unit' key={index}>
                     <section>
-                        <img className='restaurant_style' src={getImageUrl(restaurant.image_url)} />
-                        <span>{restaurant.name}</span>
+                        <img className='restaurant_style' src={getImageUrl(restaurant.get('image_url'))} />
+                        <span>{restaurant.get('name')}</span>
                     </section>
                     <section>
-                        <span>{restaurant.count}</span>
+                        <span>{restaurant.get('count')}</span>
                     </section>
                 </li>
         ) 
         let title = ''
-        if(carouselMessage[this.state.index] &&　title == ''){
-             title = carouselMessage[this.state.index].title
+        const index = this.state.index
+        if(carouselMessage.get(index) &&　title == ''){
+             title = carouselMessage.get(index).get('title')
         }
         var shopShow = this.state.shopShow;
         var showFoodList = this.state.showFoodList;
         return (
             <div>
-               <Header title={title}city={locCity.name}/>
+               <Header title={title} city={user}/>
                <div className='header_display'>
                    
                     <div  onClick={this.foodList.bind(this,showFoodList)}>
@@ -150,8 +155,8 @@ class Food extends Component{
 }
 
 const mapStateToProps = (state) =>({
-    dealInitData:state.dealInitData,
-    foodList:state.foodList
+    user:state.user,
+    foods:state.foods
 });
 
 export default connect(

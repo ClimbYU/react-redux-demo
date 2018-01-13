@@ -46,12 +46,12 @@ import SearchModule from '../components/home/searchModule'
     }
     render(){
         const {user,initData,getCarouselMessage,foods} = this.props;
-        const localName =  user.get('locCity').isEmpty() ? '' : user.getIn(['locCity','name']);
+        // const localName =  user.get('locCity').isEmpty() ? '' : user.getIn(['locCity','name']);
         const carouselMessage = foods.get('carouselMessage');
         const restaurantList = foods.get('restaurantList');
         return (
             <div>
-                {<Header title='饿了么' city={localName}/>}
+                {<Header title='饿了么' city={user}/>}
                 <SearchModule/>
                 <NavContent message={carouselMessage}/>
                 <div>

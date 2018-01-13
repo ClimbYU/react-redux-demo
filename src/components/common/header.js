@@ -15,12 +15,13 @@ export default class Header extends Component {
       
     }
     render(){
+        const localName =  this.props.city.get('locCity').isEmpty() ? '' : this.props.city.getIn(['locCity','name']);
         return (
             <div>
                 <div className='box header_box'>
                     <span>&lt;</span>
                     <span>{this.props.title}</span>
-                    <span>{this.props.city}</span>
+                    <span>{localName}</span>
                 </div>
             </div>
         );
