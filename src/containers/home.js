@@ -53,7 +53,7 @@ import SearchModule from '../components/home/searchModule'
             <div>
                 {<Header title='饿了么' city={user}/>}
                 <SearchModule/>
-                <NavContent message={carouselMessage}/>
+                <NavContent message={carouselMessage} location={user}/>
                 <div>
                     <div className='shop-padding'>附近商家</div>
                     <RecommendedStore shopMessage = {restaurantList}/>

@@ -6,6 +6,7 @@ import'../../lib/swiper.min.js'
 import '../../styles/swiper.css'
 import config from '../../config' 
 import '../../styles/nav_content.scss'
+import {getCategoryId} from '../../api/utils'
 
 export default class NavContent extends Component{
     //组件名首字母必须大写
@@ -31,12 +32,16 @@ export default class NavContent extends Component{
     render(){
         const navMessage = [];
         const navLength = this.props.message.size;
+        const latitude = this.props.location.getIn(['locCity','latitude']);
+        const  longitude = this.props.location.getIn(['locCity','longitude'])
         for (let i = 0, j = 0; i < navLength; i += 8, j++) {
             navMessage[j] = this.props.message.splice(0, 8);
         }
-        
         const swiperContent = function(message){
-            return message.map((data,index) => <Link to={'food/' + index} key={index} className='food_container_type'>
+            return message.map((data,index) => <Link 
+            to={'food/' + data.get('title') + '/' + getCategoryId(data.get('link'))
+            + '/' + latitude + '/' + longitude} 
+            key={index} className='food_container_type'>
             <figure>
                 <img src={config.IMG_BASE_URL + data.get('image_url')}/>    
                 <figcaption>{data.get('title')}</figcaption>

@@ -6,19 +6,22 @@ import $$ from 'immutable'
 import Header from '../components/common/header'
 import config from '../config' 
 import {optionDeal,getImageUrl} from '../api/utils'
-import {getCarouselMessage,initDataFreshen,getRestaurant} from '../actions'
+import {getCarouselMessage,initData,getRestaurant} from '../actions'
 import Footer from '../components/common/footer'
+import RecommendedStore from '../components/home/recommendedStore'
 import '../styles/home.scss'
+import '../styles/food.scss'
 
 class Food extends Component{
     
     constructor (props) {
         super(props);
         this.state = {
-            index:parseInt(this.props.params.type),
+            // index:parseInt(this.props.params.type),
             shopShow:'none',
             showFoodList:'food_shop_list_hide',
-            subRestaurantList:[]
+            subRestaurantList:[],
+            restaurant_id:this.props.params.restaurant_id
         }
     }
 
@@ -39,7 +42,8 @@ class Food extends Component{
     }
     getSubList(restaurant){
         this.setState({
-            subRestaurantList:restaurant.get('sub_categories')
+            subRestaurantList:restaurant.get('sub_categories'),
+            restaurant_id:restaurant.get('id')
         })
     }
     shouldComponentUpdate(nextProps, nextState){
@@ -47,21 +51,21 @@ class Food extends Component{
     }
 
     componentDidMount(){
-        if(this.props.foods.get('carouselMessage').size == 0){
-            // 获取导航栏的信息
-            const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
-            this.props.getCarouselMessage(optionShop);
-        } 
+        // if(this.props.foods.get('carouselMessage').size == 0){
+        //     // 获取导航栏的信息
+        //     const optionShop = optionDeal('get',{}, config.GET_NAV_MESSAGE);
+        //     this.props.getCarouselMessage(optionShop);
+        // } 
         if(!this.props.user.getIn(['locCity','name'])){
             // 获取所在位置信息
             const options1 = optionDeal('get',{type:'guess'}, config.GET_CUSTOMER_INFO)
-            this.props.initDataFreshen(options1)
+            this.props.initData(options1)
         } 
-        if(this.props.user.getIn(['locCity','latitude']) && 
-        this.props.user.getIn(['locCity','longitude']) && this.props.foods.get('dropdownList').size === 0){
+        if(this.props.params.latitude && this.props.params.longitude 
+         && this.props.foods.get('dropdownList').size === 0){
             //获取下拉列表信息
             const options1 = optionDeal('get',
-                        {latitude:this.props.user.getIn(['locCity','latitude']), longitude:this.props.user.getIn(['locCity','longitude'])},config.GET_RESTAURANT_INFO)
+                        {latitude:this.props.params.latitude, longitude:this.props.params.longitude },config.GET_RESTAURANT_INFO)
             this.props.getRestaurant(options1)
         }
        
@@ -78,7 +82,7 @@ class Food extends Component{
         const dropdownList = foods.get('dropdownList');
         // 第一个tab的下拉列表项
         const restaurantMessage =  dropdownList.map((restaurant,index) => 
-                <li className='shop_list_unit' key={index} onClick={this.getSubList.bind(this,restaurant)}> 
+                <li  className={this.state.restaurant_id == restaurant.get('id') ? 'shop_list_unit food_list_checked':'shop_list_unit'} key={index} onClick={this.getSubList.bind(this,restaurant)}> 
                     <section>
                         <img className='restaurant_style' src={getImageUrl(restaurant.get('image_url'))} />
                         <span>{restaurant.get('name')}</span>
@@ -99,11 +103,11 @@ class Food extends Component{
                     </section>
                 </li>
             )
-        let title = ''
-        const index = this.state.index
-        if(carouselMessage.get(index) &&　title == ''){
-             title = carouselMessage.get(index).get('title')
-        }
+        let title = this.props.params.type
+        // const index = this.state.index
+        // if(carouselMessage.get(index) &&　title == ''){
+        //      title = carouselMessage.get(index).get('title')
+        // }
         var shopShow = this.state.shopShow;
         var showFoodList = this.state.showFoodList;
         return (
@@ -136,13 +140,15 @@ class Food extends Component{
                             {restaurantMessage}
                         </ul>
                     </section>
-                    <section className='food_list'>
+                    <section className='food_list food_list_sub'>
                         <ul>
                         {subRestaurantMessage}
                         </ul>
                     </section>
                 </div>
-               
+                <div className='restaurant_top'>
+                    <RecommendedStore shopMessage = {restaurantList}/>
+                </div>
                <Footer></Footer>
             </div>        
         )
@@ -156,6 +162,6 @@ const mapStateToProps = (state) =>({
 
 export default connect(
     mapStateToProps,
-    {getCarouselMessage,initDataFreshen,getRestaurant}
+    {getCarouselMessage,initData,getRestaurant}
 )(Food)
 

@@ -170,7 +170,7 @@ export default function* root() {
       // 通常fork 和 cancel配合使用， 实现非阻塞任务，take是阻塞状态，也就是实现执行take时候，
       // 无法向下继续执行，fork是非阻塞的，同样可以使用cancel取消一个fork 任务。
       fork(watchInitData),
-      fork(watchInitDataRe),
+      // fork(watchInitDataRe),
       fork(watchShopMessage),
       fork(watchDropListMessage),
       fork(watchNavMessage),

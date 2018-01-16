@@ -68,7 +68,7 @@ const routes =
             <IndexRoute component={Home}/> 
          </Route>      
         <Route path = "/bless" getComponent = {Bless}/>
-        <Route path = "/food/:type" getComponent = {Food}/>
+        <Route path = "/food/:type/:restaurant_id/:latitude/:longitude" getComponent = {Food}/>
         <Route path = "/recharge" getComponent = {Recharge}/>
         <Route path = "/signCard" getComponent = {SignCard}/>
         <Route path = "/user" getComponent = {User}/> 

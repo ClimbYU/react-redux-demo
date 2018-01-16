@@ -5,6 +5,7 @@
     height: 21rem;
     overflow: hidden;
     background: #eeeaf3;
+    border-bottom: 1px solid #c7bbbb;
 }
 
 .food_shop_list_hide {
@@ -50,4 +51,12 @@
         opacity: 0;
         visibility: hidden;
     }
+}
+
+.food_list_checked {
+    background-color: white
+}
+
+.food_list_sub {
+    background-color: white
 }
