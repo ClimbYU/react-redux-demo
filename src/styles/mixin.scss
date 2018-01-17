@@ -40,3 +40,14 @@
         }
     }
 }
+
+// @mixin height_content($height) {
+//     height: $height
+// }
+@mixin drop_content($height) {
+    display: flex;
+    height: $height;
+    overflow: hidden;
+    background: #eeeaf3;
+    border-bottom: 1px solid #c7bbbb;
+}

@@ -1,11 +1,7 @@
 @import 'mixin';
 .food_shop_list {
     @include list-show(food_shop_list_animation 0.3s);
-    display: flex;
-    height: 21rem;
-    overflow: hidden;
-    background: #eeeaf3;
-    border-bottom: 1px solid #c7bbbb;
+    @include drop_content(21rem)
 }
 
 .food_shop_list_hide {
@@ -59,4 +55,9 @@
 
 .food_list_sub {
     background-color: white
+}
+
+.food_shop_list1 {
+    @include list-show(food_shop_list_animation 0.3s);
+    @include drop_content(16rem)
 }

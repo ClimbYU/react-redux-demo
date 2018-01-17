@@ -146,6 +146,83 @@ class Food extends Component{
                         </ul>
                     </section>
                 </div>
+                <div className='food_shop_list' style={{display:'none'}}>
+                    <ul className='sort_list'>
+                        <li>
+                            <span>☆</span>
+                            <p>智能排序</p>
+                        </li>
+                        <li>
+                            <span>☆</span>
+                            <p>距离最近</p>
+                        </li>
+                        <li>
+                            <span>☆</span>
+                            <p>智能排序</p>
+                        </li>
+                        <li>
+                            <span>☆</span>
+                            <p>智能排序</p>
+                        </li>
+                        <li>
+                            <span>☆</span>
+                            <p>智能排序</p>
+                        </li>
+                        <li>
+                            <span>☆</span>
+                            <p>智能排序</p>
+                        </li>
+                    </ul>
+                </div>
+                <div className='food_shop_list1 filter_list'>
+                    <section>
+                        <header>
+                            配送方式
+                        </header>
+                        <ul>
+                            <li>
+                                <span>☆</span>
+                                <span>蜂鸟配送</span>
+                            </li>
+                        </ul>
+                    </section>
+                       
+                    <section>
+                        <header>
+                            商家属性
+                        </header>
+                        <ul>
+                            <li>
+                                <span>☆</span>
+                                <span>蜂鸟配送</span>
+                            </li>
+                            <li>
+                                <span>☆</span>
+                                <span>外卖保</span>
+                            </li>
+                            <li>
+                                <span>☆</span>
+                                <span>准时达</span>
+                            </li>
+                            <li>
+                                <span>☆</span>
+                                <span>新店</span>
+                            </li>
+                            <li>
+                                <span>☆</span>
+                                <span>在线支付</span>
+                            </li>
+                            <li>
+                                <span>☆</span>
+                                <span>开发票</span>
+                            </li>
+                        </ul>
+                    </section>
+                    <footer className='filter_list_footer'>
+                        <button className='filter_list_clear'>清空</button>
+                        <button className='filter_list_confirm'>确定</button>
+                    </footer>
+                </div>
                 <div className='restaurant_top'>
                     <RecommendedStore shopMessage = {restaurantList}/>
                 </div>
