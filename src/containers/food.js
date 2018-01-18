@@ -1,7 +1,7 @@
 import React ,{ Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import $$ from 'immutable'
+import  { is,fromJS ,toJS}  from 'immutable'
 
 import Header from '../components/common/header'
 import config from '../config' 
@@ -21,23 +21,36 @@ class Food extends Component{
             shopShow:'none',
             showFoodList:'food_shop_list_hide',
             subRestaurantList:[],
-            restaurant_id:this.props.params.restaurant_id
+            restaurant_id:this.props.params.restaurant_id,
+            drop_list:'',
+            drop_list_type:''
         }
     }
 
-    foodList(state){ 
-        if(state == 'food_shop_list_hide'){
+    foodList(list,type){ 
+        // if(state == 'food_shop_list_hide'){
+        //     this.setState({
+        //         shopShow:'flex',
+        //         showFoodList:'food_shop_list',
+        //         subRestaurantList:this.props.foods.get('dropdownList').getIn([0,'sub_categories'])
+        //     })
+        // }else{
+        //     this.setState({
+        //         shopShow:'none',
+        //         showFoodList:'food_shop_list_hide'
+        //     })
+        // }
+        if(type === this.state.drop_list_type){
             this.setState({
-                shopShow:'flex',
-                showFoodList:'food_shop_list',
-                subRestaurantList:this.props.foods.get('dropdownList').getIn([0,'sub_categories'])
+                drop_list_type:''
             })
         }else{
             this.setState({
-                shopShow:'none',
-                showFoodList:'food_shop_list_hide'
+                drop_list:list,
+                drop_list_type:type
             })
         }
+       
         
     }
     getSubList(restaurant){
@@ -47,7 +60,7 @@ class Food extends Component{
         })
     }
     shouldComponentUpdate(nextProps, nextState){
-        return !$$.is($$.fromJS(this.props), $$.fromJS(nextProps)) || !$$.is($$.fromJS(this.state),$$.fromJS(nextState))
+        return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state),fromJS(nextState))
     }
 
     componentDidMount(){
@@ -92,6 +105,7 @@ class Food extends Component{
                     </section>
                 </li>
         ) 
+       
         // 下拉列表的子列表
         const subRestaurantMessage = this.state.subRestaurantList.map((sub,index) => 
                 <li  className='food_list_unit' key={index}>
@@ -109,32 +123,10 @@ class Food extends Component{
         //      title = carouselMessage.get(index).get('title')
         // }
         var shopShow = this.state.shopShow;
+        const drop_type = this.state.drop_list_type !== '' ? 'block' : 'none';
         var showFoodList = this.state.showFoodList;
-        return (
-            <div>
-               <Header title={title} city={user}/>
-               <div className='header_display'>
-                   
-                    <div  onClick={this.foodList.bind(this,showFoodList)}>
-                        <section className='border_food border_right'>
-                            <span>{title}</span>
-                            <span>></span>
-                        </section>
-                    </div>
-                    <div>
-                        <section  className='border_food  border_right'>
-                            <span>智能排序</span>
-                            <span>></span>
-                        </section>
-                    </div>
-                    <div>
-                        <section className='border_food'>
-                            <span>筛选</span>
-                            <span>></span>
-                        </section>
-                    </div>
-                </div>
-                <div className={showFoodList} style={{display:shopShow}}>
+        var classify_list = 
+                <div className='food_shop_list' style={{display:'flex'}}>
                     <section className='shop_list'>
                         <ul>
                             {restaurantMessage}
@@ -145,8 +137,9 @@ class Food extends Component{
                         {subRestaurantMessage}
                         </ul>
                     </section>
-                </div>
-                <div className='food_shop_list' style={{display:'none'}}>
+                </div>;
+        var  sort_list = 
+            <div className='food_shop_list' style={{display:'flex'}}>
                     <ul className='sort_list'>
                         <li>
                             <span>☆</span>
@@ -173,7 +166,8 @@ class Food extends Component{
                             <p>智能排序</p>
                         </li>
                     </ul>
-                </div>
+            </div> ;
+        var filter_list =   
                 <div className='food_shop_list1 filter_list'>
                     <section>
                         <header>
@@ -186,7 +180,7 @@ class Food extends Component{
                             </li>
                         </ul>
                     </section>
-                       
+                    
                     <section>
                         <header>
                             商家属性
@@ -222,7 +216,36 @@ class Food extends Component{
                         <button className='filter_list_clear'>清空</button>
                         <button className='filter_list_confirm'>确定</button>
                     </footer>
+                </div>        
+        return (
+            <div>
+               <Header title={title} city={user}/>
+               <div className='header_display'>
+                   
+                    <div  onClick={this.foodList.bind(this,classify_list,'classify')}>
+                        <section className='border_food border_right'>
+                            <span>{title}</span>
+                            <span>></span>
+                        </section>
+                    </div>
+                    <div onClick={this.foodList.bind(this,sort_list,'sort')}>
+                        <section  className='border_food  border_right'>
+                            <span>智能排序</span>
+                            <span>></span>
+                        </section>
+                    </div>
+                    <div onClick={this.foodList.bind(this,filter_list,'filter')}>
+                        <section className='border_food'>
+                            <span>筛选</span>
+                            <span>></span>
+                        </section>
+                    </div>
                 </div>
+               
+                <div style={{'display':drop_type}}>
+                    {this.state.drop_list}
+                </div>
+                
                 <div className='restaurant_top'>
                     <RecommendedStore shopMessage = {restaurantList}/>
                 </div>
