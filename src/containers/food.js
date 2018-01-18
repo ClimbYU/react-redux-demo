@@ -46,7 +46,7 @@ class Food extends Component{
             })
         }else{
             this.setState({
-                drop_list:list,
+                // drop_list:list,
                 drop_list_type:type
             })
         }
@@ -216,7 +216,8 @@ class Food extends Component{
                         <button className='filter_list_clear'>清空</button>
                         <button className='filter_list_confirm'>确定</button>
                     </footer>
-                </div>        
+                </div>  
+        const drop_list = this.state.drop_list_type === 'classify'? classify_list : (this.state.drop_list_type === 'sort' ? sort_list : filter_list )
         return (
             <div>
                <Header title={title} city={user}/>
@@ -243,7 +244,7 @@ class Food extends Component{
                 </div>
                
                 <div style={{'display':drop_type}}>
-                    {this.state.drop_list}
+                    {drop_list}
                 </div>
                 
                 <div className='restaurant_top'>
